@@ -1,25 +1,26 @@
 const canvas = document.getElementById("scratchCanvas");
 const ctx = canvas.getContext("2d");
 
-// 1. Dibuja primero fondo blanco por si acaso
+// Paso 1: pinta fondo blanco
 ctx.fillStyle = "#ffffff";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-// 2. Dibuja el texto que se revelará
+// Paso 2: dibuja el mensaje
 ctx.fillStyle = "#000000";
 ctx.font = "bold 18px Arial";
 ctx.textAlign = "center";
 ctx.textBaseline = "middle";
 ctx.fillText("¿Quieres ser el padrino de Julieta?", canvas.width / 2, canvas.height / 2);
 
-// 3. Capa gris encima que será "rascable"
+// Paso 3: añade la capa gris
 ctx.globalCompositeOperation = "source-over";
 ctx.fillStyle = "#c0c0c0";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-// 4. Activamos modo borrado
+// Paso 4: activa el modo "borrar"
 ctx.globalCompositeOperation = "destination-out";
 
+// Interacción
 let isDrawing = false;
 
 function getPosition(e) {
@@ -39,6 +40,7 @@ function draw(e) {
   ctx.fill();
 }
 
+// Soporte para ratón y táctil
 canvas.addEventListener("mousedown", () => isDrawing = true);
 canvas.addEventListener("mouseup", () => isDrawing = false);
 canvas.addEventListener("mousemove", draw);
